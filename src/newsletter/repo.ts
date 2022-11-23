@@ -1,19 +1,15 @@
 import NewsPost from "./NewsPost";
 
-// const connection = "redis://default:da29db675ded4c2fb1befa1b5d06e14a@us1-holy-duck-38417.upstash.io:38417";
-// const redisKey = '_newsletter';
 
 export default class NewsletterRepo {
-    // private client: Redis;
     private data: {[id: string]: NewsPost} = {};
-    // constructor() {
-        // this.client = new Redis(connection);
-    // }
 
     async createPost(title?: string, details?: string): Promise<NewsPost> {
-        const id = Date.now().toString();
+        const now = Date.now();
+        const id = now.toString();
         const post: NewsPost = {
-            id, title: title ?? '', details: details ??''
+            id, title: title ?? '', details: details ?? '',
+            createdAt: now, updatedAt: now
         };
         this.data[id] = post;
         return post;
@@ -39,6 +35,7 @@ export default class NewsletterRepo {
                 post.title = title;
             if(description)
                 post.details = description;
+            post.updatedAt = Date.now();
         }
         return post;
     }

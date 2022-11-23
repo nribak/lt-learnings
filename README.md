@@ -4,7 +4,9 @@
     interface NewsPost {
         id: string,
         title: string,
-        details: string
+        details: string,
+        createdAt: number,
+        updatedAt: number
 }
 
 ### Get all posts
