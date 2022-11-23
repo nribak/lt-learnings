@@ -1,3 +1,4 @@
+import colors from 'colors/safe';
 import express from 'express';
 import router from "./newsletter/route";
 
@@ -7,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 app.use((req, res, next) => {
-    console.log(req.method, req.url);
+    console.log(colors.green(req.method) + ':', colors.bgGreen(req.url));
     next();
 });
 

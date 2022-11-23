@@ -13,7 +13,9 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const {id} = req.params;
     const data = await repo.getById(id);
-    res.json(data);
+    if(data)
+        res.json(data);
+    else res.sendStatus(404);
 });
 
 router.post('/', async (req, res) => {
@@ -31,7 +33,9 @@ router.put('/:id', async (req, res) => {
     const {id} = req.params;
     const {title, details} = req.body;
     const data = await repo.updatePost(id, title, details);
-    res.json(data);
+    if(data)
+        res.json(data);
+    else res.sendStatus(404);
 });
 
 export default router;
