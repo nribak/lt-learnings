@@ -1,4 +1,4 @@
-import NewsPost from "./NewsPost";
+import NewsPost, {NewsPostSummary} from "./NewsPost";
 
 
 export default class NewsletterRepo {
@@ -16,8 +16,9 @@ export default class NewsletterRepo {
     }
 
 
-    async getAll(): Promise<NewsPost[]> {
-        return Object.values(this.data);
+    async getAll(): Promise<NewsPostSummary[]> {
+        const all = Object.values(this.data);
+        return all.map(({id, title, updatedAt}) => ({id, title, updatedAt}));
     }
 
     async getById(id: string): Promise<NewsPost|null> {
