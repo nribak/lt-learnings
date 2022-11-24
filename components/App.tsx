@@ -3,7 +3,7 @@ import {MDBContainer} from "mdb-react-ui-kit";
 import NewsList from "./list/NewsList";
 import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
-import NewPostItem from "./NewPostItem";
+import NewPostItem from "./list/NewPostItem";
 
 export default function App({data}: {data: NewsItem[]}) {
     const router = useRouter();

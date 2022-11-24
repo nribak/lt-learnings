@@ -1,6 +1,6 @@
-import {NewsItem} from "../data/models";
+import {NewsItem} from "../../data/models";
 import {MDBBtn, MDBInput, MDBTextArea} from "mdb-react-ui-kit";
-import {useForm} from "./utils/hooks";
+import {useForm} from "../utils/hooks";
 import {FormEvent} from "react";
 
 export interface FormData {

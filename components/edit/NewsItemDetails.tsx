@@ -1,6 +1,6 @@
-import {NewsItem} from "../data/models";
+import {NewsItem} from "../../data/models";
 import {MDBCard, MDBCardBody, MDBCardFooter, MDBCardHeader, MDBCardText} from "mdb-react-ui-kit";
-import LastUpdatedText from "./LastUpdatedText";
+import LastUpdatedText from "../LastUpdatedText";
 
 export default function NewsItemDetails({item}: {item: NewsItem}) {
     const {title, details, updatedAt} = item;
