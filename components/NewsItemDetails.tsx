@@ -8,7 +8,7 @@ export default function NewsItemDetails({item}: {item: NewsItem}) {
         <MDBCard className="large-card-height">
             <MDBCardHeader className="app-font-bold text-capitalize">{title}</MDBCardHeader>
             <MDBCardBody>
-                <MDBCardText>
+                <MDBCardText className="details-text">
                     {details}
                 </MDBCardText>
             </MDBCardBody>

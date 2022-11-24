@@ -12,12 +12,13 @@ export default function ArticleEdit({item}: {item: NewsItem}) {
     const router = useRouter();
     const [editMode, toggleEditMode] = useToggle(item.title.length === 0);
 
+    const goBack = () => router.push('/');
     const handleDelete = () => {
-
+        clientAPI.delete(item.id).then(goBack);
     }
 
     const handleEdit = ({title, details}: FormData) => {
-        clientAPI.update(item.id, title, details).then(router.reload);
+        clientAPI.update(item.id, title, details).then(goBack);
     }
 
     return (

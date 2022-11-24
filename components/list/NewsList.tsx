@@ -1,7 +1,7 @@
-import {NewsItem} from "../data/models";
+import {NewsItem} from "../../data/models";
 import {MDBRow} from "mdb-react-ui-kit";
 import NewsSingleItem from "./NewsSingleItem";
-import AppCol from "./common/AppCol";
+import AppCol from "../common/AppCol";
 
 export default function NewsList({data}: {data: NewsItem[]}) {
     return (

@@ -1,7 +1,7 @@
-import {NewsItem} from "../data/models";
+import {NewsItem} from "../../data/models";
 import {MDBCard, MDBCardBody, MDBCardFooter, MDBCardText, MDBRipple} from "mdb-react-ui-kit";
 import Link from "next/link";
-import LastUpdatedText from "./LastUpdatedText";
+import LastUpdatedText from "../LastUpdatedText";
 
 export default function NewsSingleItem({post}: {post: NewsItem}) {
     const {title, updatedAt, id} = post;
@@ -11,7 +11,7 @@ export default function NewsSingleItem({post}: {post: NewsItem}) {
                 <MDBCard className="h-100" shadow='0' border="dark">
                     <MDBCardBody>
                         <MDBCardText className="text-capitalize">{title}</MDBCardText>
-                        <MDBCardFooter>
+                        <MDBCardFooter className="p-0">
                             <LastUpdatedText time={updatedAt} />
                         </MDBCardFooter>
                     </MDBCardBody>

@@ -21,6 +21,9 @@ const API = {
     async updateById(id: string, title?: string, details?: string): Promise<NewsItem|null> {
         const {data} = await instance.put(`/${id}`, {title, details});
         return data;
+    },
+    async delete(id: string){
+        await instance.delete(`/${id}`);
     }
 }
 

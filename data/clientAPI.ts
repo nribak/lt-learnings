@@ -13,6 +13,10 @@ const clientAPI = {
     async update(id: string, title?: string, details?: string): Promise<NewsItem|null> {
         const {data} = await instance.post('/edit', {id, title, details});
         return data;
+    },
+    async delete(id: string){
+        const {data} = await instance.post('/delete', {id});
+        return data;
     }
 }
 

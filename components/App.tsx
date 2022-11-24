@@ -1,6 +1,6 @@
 import {NewsItem} from "../data/models";
 import {MDBContainer} from "mdb-react-ui-kit";
-import NewsList from "./NewsList";
+import NewsList from "./list/NewsList";
 import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
 import NewPostItem from "./NewPostItem";

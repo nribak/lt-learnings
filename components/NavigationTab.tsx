@@ -12,10 +12,10 @@ export default function NavigationTab({onEdit, onDelete}: {onEdit: () => void, o
                     </MDBBtn>
                 </Link>
                 <div>
-                    <MDBBtn color="warning" floating className="ms-2" onClick={onEdit}>
+                    <MDBBtn color="warning" floating outline className="ms-2" onClick={onEdit}>
                         <MDBIcon fas icon="pen" />
                     </MDBBtn>
-                    <MDBBtn color="danger" floating className="ms-2" onClick={onDelete}>
+                    <MDBBtn color="danger" floating outline className="ms-2" onClick={onDelete}>
                         <MDBIcon fas icon="trash-alt" />
                     </MDBBtn>
                 </div>
