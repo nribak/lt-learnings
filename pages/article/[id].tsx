@@ -1,10 +1,10 @@
 import {NewsItem} from "../../data/models";
 import {GetServerSideProps} from "next";
 import API from "../../data/api";
-import ArticleEdit from "../../components/ArticleEdit";
+import Article from "../../components/Article";
 
 export default function Article({item}: {item: NewsItem}) {
-    return <ArticleEdit item={item} />;
+    return <Article item={item} />;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

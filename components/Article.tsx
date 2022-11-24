@@ -8,7 +8,7 @@ import {useToggle} from "./utils/hooks";
 import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
 
-export default function ArticleEdit({item}: {item: NewsItem}) {
+export default function Article({item}: {item: NewsItem}) {
     const router = useRouter();
     const [editMode, toggleEditMode] = useToggle(item.title.length === 0);
 
