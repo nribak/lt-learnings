@@ -15,6 +15,7 @@
     "@types/colors": "^1.2.1",
     "@types/express": "^4.17.14",
     "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.7.3"
   }

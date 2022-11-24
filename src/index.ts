@@ -1,8 +1,10 @@
 import app from "./app";
 import mongoose from "mongoose";
 
-const mongoUri = "mongodb+srv://nribak:1q2w3e4r@cluster0.pxy1i.mongodb.net/learnings?retryWrites=true&w=majority";
-const port = 4000;
+require('dotenv').config()
+
+const mongoUri = `${process.env.ATLAS_ENDPOINT}/${process.env.ATLAS_TABLE}`;
+const port = parseInt(process.env.EXPRESS_PORT!);
 
 mongoose.connect(mongoUri).then(() => {
     console.log('MongoDB is connected');
