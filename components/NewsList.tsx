@@ -1,19 +1,15 @@
 import {NewsItem} from "../data/models";
 import {MDBRow} from "mdb-react-ui-kit";
-import PostItem from "./PostItem";
+import NewsSingleItem from "./NewsSingleItem";
 import AppCol from "./common/AppCol";
-import NewPostItem from "./NewPostItem";
 
-export default function PostList({data, onNew}: {data: NewsItem[], onNew: () => void}) {
+export default function NewsList({data}: {data: NewsItem[]}) {
     return (
         <MDBRow>
-            <AppCol>
-                <NewPostItem onNew={onNew}/>
-            </AppCol>
             {data.map(item => {
                 return (
                     <AppCol key={item.id}>
-                        <PostItem post={item} />
+                        <NewsSingleItem post={item} />
                     </AppCol>
                 )
             })}

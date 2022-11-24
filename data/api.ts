@@ -17,6 +17,10 @@ const API = {
     async getById(id: string): Promise<NewsItem|null> {
         const {data} = await instance.get(`/${id}`);
         return data;
+    },
+    async updateById(id: string, title?: string, details?: string): Promise<NewsItem|null> {
+        const {data} = await instance.put(`/${id}`, {title, details});
+        return data;
     }
 }
 

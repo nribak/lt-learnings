@@ -1,17 +1,23 @@
 import {NewsItem} from "../data/models";
 import {MDBContainer} from "mdb-react-ui-kit";
-import PostList from "./PostList";
+import NewsList from "./NewsList";
+import clientAPI from "../data/clientAPI";
+import {useRouter} from "next/router";
+import NewPostItem from "./NewPostItem";
 
 export default function App({data}: {data: NewsItem[]}) {
+    const router = useRouter();
 
     const handleNewPost = () => {
-
+        clientAPI.create().then(id => {
+            router.push(`/article/${id}`).then();
+        })
     }
 
     return (
-        <MDBContainer>
-
-            <PostList data={data} onNew={handleNewPost} />
+        <MDBContainer className="pt-2">
+            <NewPostItem onNew={handleNewPost}/>
+            <NewsList data={data}  />
         </MDBContainer>
     )
 }
