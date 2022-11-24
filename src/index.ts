@@ -1,17 +1,10 @@
-import colors from 'colors/safe';
-import express from 'express';
-import router from "./newsletter/route";
+import app from "./app";
+import mongoose from "mongoose";
 
+const mongoUri = "mongodb+srv://nribak:1q2w3e4r@cluster0.pxy1i.mongodb.net/learnings?retryWrites=true&w=majority";
 const port = 4000;
 
-const app = express();
-app.use(express.json());
-
-app.use((req, res, next) => {
-    console.log(colors.green(req.method) + ':', colors.bgGreen(req.url));
-    next();
+mongoose.connect(mongoUri).then(() => {
+    console.log('MongoDB is connected');
 });
-
-app.use('/news', router);
-
 app.listen(port, () => console.log(`posts service running: ${port}`));

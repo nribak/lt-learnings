@@ -1,43 +1,42 @@
-import NewsPost, {NewsPostSummary} from "./NewsPost";
-
+import NewsPost, {NewsPostModel} from "./NewsPost";
+import {NewsLetter, NewsLetterSummary, parseNewsLetterModel, parseSummaryModel} from "./models";
 
 export default class NewsletterRepo {
-    private data: {[id: string]: NewsPost} = {};
 
-    async createPost(title?: string, details?: string): Promise<NewsPost> {
+    async createPost(title?: string, details?: string): Promise<NewsLetter> {
         const now = Date.now();
-        const id = now.toString();
         const post: NewsPost = {
-            id, title: title ?? '', details: details ?? '',
+            title: title ?? '', details: details ?? '',
             createdAt: now, updatedAt: now
         };
-        this.data[id] = post;
-        return post;
+        const document = await NewsPostModel.create(post);
+        return parseNewsLetterModel(document);
     }
 
 
-    async getAll(): Promise<NewsPostSummary[]> {
-        const all = Object.values(this.data);
-        return all.map(({id, title, updatedAt}) => ({id, title, updatedAt}));
+    async getAll(): Promise<NewsLetterSummary[]> {
+        const result = await NewsPostModel.find({}, '_id title updatedAt createdAt');
+        return result.map(item => parseSummaryModel(item));
     }
 
-    async getById(id: string): Promise<NewsPost|null> {
-        return this.data[id] ?? null;
+    async getById(id: string): Promise<NewsLetter|null> {
+        const result = await NewsPostModel.findById(id);
+        if(result)
+            return parseNewsLetterModel(result);
+        else return null;
     }
 
-    async deleteById(id: string): Promise<boolean> {
-        return delete this.data[id];
+    async deleteById(id: string): Promise<NewsLetter|null> {
+        const doc = await NewsPostModel.findByIdAndDelete(id);
+        if(doc)
+            return parseNewsLetterModel(doc);
+        else return null;
     }
 
-    async updatePost(id: string, title?: string, description?: string): Promise<NewsPost|null> {
-        const post = this.data[id] ?? null;
-        if(post) {
-            if(title)
-                post.title = title;
-            if(description)
-                post.details = description;
-            post.updatedAt = Date.now();
-        }
-        return post;
+    async updatePost(id: string, title?: string, details?: string): Promise<NewsLetter|null> {
+        const doc = await NewsPostModel.findByIdAndUpdate(id, {title, details}, {new: true});
+        if(doc)
+            return parseNewsLetterModel(doc);
+        else return null;
     }
 }

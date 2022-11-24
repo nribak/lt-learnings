@@ -1,10 +1,18 @@
-export interface NewsPostSummary {
-    id: string,
-    title: string,
-    updatedAt: number
+import {prop, getModelForClass} from "@typegoose/typegoose";
+
+export default class NewsPost {
+
+    @prop()
+    public details!: string;
+
+    @prop()
+    public title!: string;
+
+    @prop()
+    public updatedAt!: number
+
+    @prop()
+    public createdAt!: number
 }
 
-export default interface NewsPost extends NewsPostSummary {
-    details: string
-    createdAt: number,
-}
+export const NewsPostModel = getModelForClass(NewsPost);
