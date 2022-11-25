@@ -3,7 +3,7 @@ import {NewsItem} from "./models";
 
 const instance = axios.create({
     baseURL: 'https://frozen-stream-57269.herokuapp.com/news',
-    headers: {Authorization: 'abcd'}
+    headers: {Authorization: '020e46c2-864c-46b5-9ca9-db6367317b3c'}
 })
 const API = {
     async create(): Promise<string> {
