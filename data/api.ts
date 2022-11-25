@@ -2,7 +2,7 @@ import axios from "axios";
 import {NewsItem} from "./models";
 
 const instance = axios.create({
-    baseURL: 'http://localhost:4000/news',
+    baseURL: 'https://frozen-stream-57269.herokuapp.com/news',
     headers: {Authorization: 'abcd'}
 })
 const API = {
