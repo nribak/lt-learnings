@@ -14,6 +14,9 @@
 }
 ```
 
+### Base URL
+```https://frozen-stream-57269.herokuapp.com/news```
+
 #### API
 
 | endpoint  | method | body             | Response          |
