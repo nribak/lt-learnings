@@ -1,43 +1,26 @@
 # Newsletter API
 
 #### Base Model
-    interface NewsPost {
-        id: string,
-        title: string,
-        details: string,
-        createdAt: number,
-        updatedAt: number
+```
+    interface NewsLetterSummary {
+            id: string,
+            title: string,
+            createdAt: number,
+            updatedAt: number
 }
 
-### Get all posts
-#### request 
-    GET /news
-#### response
-    List of news posts
+    interface NewsLetter extends NewsPostSummary {
+        details: string,
+}
+```
 
-### Get by post ID
-#### request
-    GET /news/:id
-#### response
-    the post or null if not found
+#### API
 
-### Create a new post
-#### request
-    POST /news {title?: string, details?: string}
-#### response
-    the newly created post
-
-### Delete a post
-#### request
-    DELETE /news/:id
-#### response
-    boolean if successful
-
-### Update a post
-#### request
-    POST /news/:id {title?: string, details?: string}
-#### response
-    the updated post
-
-
+| endpoint  | method | body             | Response          |
+|-----------|:------:|:-----------------|-------------------|
+| /news     |  GET   | none             | NewsPostSummary[] |
+| /news/:id |  GET   | none             | NewsPost          |
+| /news     |  POST  | {title, details} | NewsPost          |
+| /news/:id | DELETE | none             | NewsPost          |
+| /news/:id |  PUT   | {title, details} | NewsPost          |
 
