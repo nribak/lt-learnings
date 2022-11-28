@@ -17,6 +17,9 @@
 ### Base URL
 ```https://frozen-stream-57269.herokuapp.com/news```
 
+### Security
+```Authorization: 020e46c2-864c-46b5-9ca9-db6367317b3c```
+
 #### API
 
 | endpoint  | method | body             | Response          |
