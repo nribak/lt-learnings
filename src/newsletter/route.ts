@@ -1,7 +1,9 @@
 import express from "express";
 import NewsletterRepo from "./repo";
+import {authMiddleware} from "../middlewares";
 
 const router = express.Router();
+router.use(authMiddleware);
 
 const repo = new NewsletterRepo();
 
