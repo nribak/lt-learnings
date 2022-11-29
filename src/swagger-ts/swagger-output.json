@@ -1,40 +1,40 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
     "title": "Newsletter API",
-    "description": "CRUD operations"
+    "version": "1.0.0",
+    "description": ""
   },
-  "host": "frozen-stream-57269.herokuapp.com",
+  "host": "localhost:4000",
   "basePath": "/news",
   "schemes": [
-    "https"
+    "http"
   ],
   "securityDefinitions": {
-    "APIKeyHeader": {
+    "apiKeyHeader": {
       "type": "apiKey",
       "in": "header",
       "name": "Authorization"
     }
   },
-  "security": [
-    {
-      "APIKeyHeader": []
-    }
-  ],
   "paths": {
     "/": {
       "get": {
-        "description": "Get all posts",
+        "description": "",
         "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
       },
       "post": {
-        "description": "Create a new post",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -43,10 +43,10 @@
               "type": "object",
               "properties": {
                 "title": {
-                  "example": "string"
+                  "example": "any"
                 },
                 "details": {
-                  "example": "string"
+                  "example": "any"
                 }
               }
             }
@@ -56,7 +56,12 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
       }
     },
     "/{id}": {
@@ -77,7 +82,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
       },
       "delete": {
         "description": "",
@@ -93,7 +103,12 @@
           "200": {
             "description": "OK"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
       },
       "put": {
         "description": "",
@@ -127,7 +142,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "apiKeyHeader": []
+          }
+        ]
       }
     }
   }
