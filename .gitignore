@@ -7,7 +7,7 @@
 .idea
 # testing
 /coverage
-
+newsletter-next.iml
 # next.js
 /.next/
 /out/
