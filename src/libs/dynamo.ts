@@ -4,7 +4,7 @@ import {
     DynamoDBClient,
     GetItemCommand,
     PutItemCommand,
-    ScanCommand
+    ScanCommand, UpdateItemCommand
 } from "@aws-sdk/client-dynamodb";
 import {NewsLetter, NewsLetterSummary} from "@functions/newsletter/models";
 import {marshall, unmarshall} from "@aws-sdk/util-dynamodb";
@@ -60,27 +60,18 @@ const db = {
         return respond.$metadata.httpStatusCode
     },
     updateById: async (id: string, title?: string, details?: string): Promise<NewsLetter|null> => {
-        const {Item} = await client.send(new GetItemCommand({
+        const data = await client.send(new UpdateItemCommand({
             TableName: table,
-            Key: {
-                id: {S: id}
+            ReturnValues: 'ALL_NEW',
+            Key: {id: {S: id}},
+            UpdateExpression: 'set title = :t, details = :d, updatedAt = :u',
+            ExpressionAttributeValues: {
+               ':t': {S: title},
+                ':d': {S: details},
+                ':u': {N: Date.now().toString()}
             }
         }));
-        const post: NewsLetter = convertFromRecord(Item);
-        if(post) {
-            if(title)
-                post.title = title;
-            if(details)
-                post.details = details;
-            post.updatedAt = Date.now();
-
-            await client.send(new PutItemCommand({
-                TableName: table,
-                Item: convertToRecord(post)
-            }));
-            return post;
-        }
-        return null;
+        return convertFromRecord(data.Attributes);
     }
 }
 
