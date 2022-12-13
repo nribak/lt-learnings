@@ -1,16 +1,13 @@
 import {MDBContainer} from "mdb-react-ui-kit";
 import {GetServerSideProps} from "next";
-import serverApi from "../api/server.api";
-import {PostSummary} from "../api/models";
+import serverApi from "../api-helpers/server.api";
+import {PostSummary} from "../api-helpers/models";
+import PostsList from "../components/PostsList";
 
 export default function Home({posts}: {posts: PostSummary[]}) {
   return (
-      <MDBContainer>
-          <div className="fs-3">
-              <ol>
-                  {posts.map(post => <li key={post.id}>{post.title}</li>)}
-              </ol>
-          </div>
+      <MDBContainer className="pt-2">
+          <PostsList postSummaries={posts} />
       </MDBContainer>
   )
 }

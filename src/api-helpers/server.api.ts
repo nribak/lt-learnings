@@ -2,9 +2,9 @@ import axios from "axios";
 import {Post, PostSummary} from "./models";
 
 const instance = axios.create({
-    baseURL: 'http://172.22.220.218:4000/news',
+    baseURL: 'https://yhn4sqmmcb.execute-api.us-east-1.amazonaws.com/production',
     headers: {
-        Authorization: '020e46c2-864c-46b5-9ca9-db6367317b3c'
+        'x-api-key': '020e46c2-864c-46b5-9ca9-db6367317b3c'
     }
 });
 
