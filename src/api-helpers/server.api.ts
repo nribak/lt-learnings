@@ -16,6 +16,16 @@ const serverApi = {
     getAllPosts: async (): Promise<PostSummary[]> => {
         const {data} = await instance.get('/');
         return data;
+    },
+    getPostById: async (id: string): Promise<Post|null> => {
+        try {
+            if(id === '1')
+                return null;
+            const {data} = await instance.get(`/${id}`);
+            return data;
+        } catch (e) {
+            return null;
+        }
     }
 }
 
