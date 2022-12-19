@@ -6,8 +6,8 @@ export default function PostDetails({post}: {post: Post}) {
     return (
         <MDBCard>
             <MDBCardBody>
-                <MDBCardTitle>{title}</MDBCardTitle>
-                <MDBCardText>{details}</MDBCardText>
+                <MDBCardTitle className="app-font-bold">{title}</MDBCardTitle>
+                <MDBCardText className="app-font-light">{details}</MDBCardText>
             </MDBCardBody>
         </MDBCard>
     )
