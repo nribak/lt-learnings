@@ -6,6 +6,7 @@ export interface NewsLetterSummary {
 }
 
 export interface NewsLetter extends NewsLetterSummary {
-    details: string
+    details: string,
+    imageId?: string
 }
 

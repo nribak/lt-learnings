@@ -24,3 +24,9 @@ export const updatePostHandler = {
     handler: `${handlerPath(__dirname)}/handler.updatePost`,
     name: 'NewsletterUpdate'
 }
+
+
+export const imageUploader = {
+    handler: `${handlerPath(__dirname)}/handler.uploadImage`,
+    name: 'NewsletterUploadImage'
+}

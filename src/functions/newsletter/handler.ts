@@ -1,5 +1,6 @@
 import {NewsLetter, NewsLetterSummary} from "@functions/newsletter/models";
 import db from "@libs/dynamo";
+import uploadToS3 from "@libs/s3";
 
 export const getAllPosts = async (): Promise<NewsLetterSummary[]> => {
     return await db.getAll();
@@ -18,8 +19,13 @@ export const deletePost = async ({id}: {id: string}): Promise<boolean> => {
     return status < 400;
 }
 
-export const updatePost = async ({id, details, title}: {id: string, title?: string, details: string}): Promise<any> => {
-    return await db.updateById(id, title, details);
+export const updatePost = async ({id, details, title, imageId}: {id: string, title?: string, details?: string, imageId?: string}): Promise<any> => {
+    return await db.updateById(id, title, details, imageId);
+}
+
+export const uploadImage = async ({fileName, fileBody}: {fileName: string, fileBody: string})=> {
+    console.log('start upload', fileName);
+    return await uploadToS3(fileName, fileBody);
 }
 
 /*

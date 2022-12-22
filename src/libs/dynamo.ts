@@ -6,6 +6,7 @@ import {
     PutItemCommand,
     ScanCommand, UpdateItemCommand
 } from "@aws-sdk/client-dynamodb";
+
 import {NewsLetter, NewsLetterSummary} from "@functions/newsletter/models";
 import {marshall, unmarshall} from "@aws-sdk/util-dynamodb";
 
@@ -20,7 +21,8 @@ function convertToRecord<T>(value: T): Record<string, AttributeValue> {
     });
 }
 
-const client = new DynamoDBClient({region: 'us-east-1'});
+const client = new DynamoDBClient({region: 'us-east-1' });
+
 const table = 'newsletter';
 
 const db = {
@@ -32,13 +34,15 @@ const db = {
         return data.Items.map(item => convertFromRecord(item))
     },
     getById: async (id: string): Promise<NewsLetter|null> => {
-        const data = await client.send(new GetItemCommand({
+        const {Item} = await client.send(new GetItemCommand({
             TableName: table,
             Key: {
                 id: {S: id}
             }
         }));
-        return convertFromRecord(data.Item);
+        if(Item)
+            return convertFromRecord(Item);
+        else return null;
     },
     createNew: async (title?: string, details?: string): Promise<NewsLetter> => {
         const now = Date.now();
@@ -59,17 +63,18 @@ const db = {
         }));
         return respond.$metadata.httpStatusCode
     },
-    updateById: async (id: string, title?: string, details?: string): Promise<NewsLetter|null> => {
+    updateById: async (id: string, title?: string, details?: string, imageId?: string): Promise<NewsLetter|null> => {
         const data = await client.send(new UpdateItemCommand({
             TableName: table,
             ReturnValues: 'ALL_NEW',
             Key: {id: {S: id}},
-            UpdateExpression: 'set title = :t, details = :d, updatedAt = :u',
+            UpdateExpression: 'set title = :t, details = :d, updatedAt = :u, imageId = :img',
             ExpressionAttributeValues: {
                ':t': {S: title},
                 ':d': {S: details},
-                ':u': {N: Date.now().toString()}
-            }
+                ':u': {N: Date.now().toString()},
+                ':img': {S: imageId}
+            },
         }));
         return convertFromRecord(data.Attributes);
     }
