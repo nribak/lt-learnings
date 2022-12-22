@@ -22,3 +22,14 @@ body {
 .large-card-height {
   min-height: 40vh;
 }
+
+.img-box {
+  position: relative;
+  height: 250px;
+  width: auto;
+  margin: 1rem;
+}
+
+.img-box > img {
+  object-fit: contain;
+}

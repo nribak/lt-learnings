@@ -1,7 +1,8 @@
 export interface NewsItem {
     id: string,
-    title: string,
+    title?: string,
     createdAt: number,
     updatedAt: number,
-    details?: string
+    details?: string,
+    imageIds: string[]
 }
