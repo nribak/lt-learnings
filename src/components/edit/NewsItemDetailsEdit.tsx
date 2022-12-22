@@ -1,20 +1,18 @@
 import {NewsItem} from "../../data/models";
 import {MDBBtn, MDBCard, MDBCardBody, MDBInput, MDBTextArea} from "mdb-react-ui-kit";
-import {useFile, useForm} from "../utils/hooks";
+import {useForm} from "../utils/hooks";
 import {FormEvent} from "react";
 
 export interface FormData {
     title: string,
     details: string,
-    file?: File
 }
 
 export default function NewsItemDetailsEdit({item, onEdited}: {item: NewsItem, onEdited: (formData: FormData) => void}) {
     const [state, onChange] = useForm<FormData>({title: item.title ?? '', details: item.details ?? ''});
-    const [file, setFile] = useFile();
     const handleSubmit = (ev: FormEvent<HTMLFormElement>) => {
         ev.preventDefault();
-        onEdited({...state, file});
+        onEdited({...state});
     }
 
     return (

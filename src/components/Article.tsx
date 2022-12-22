@@ -9,6 +9,7 @@ import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
 import {useState} from "react";
 import ImageList from "./edit/ImageList";
+import ImageInput from "./edit/ImageInput";
 
 export default function Article({item}: {item: NewsItem}) {
     const router = useRouter();
@@ -30,6 +31,7 @@ export default function Article({item}: {item: NewsItem}) {
             setIsLoading(false);
         })
     }
+//https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
 
     return (
         <>
@@ -39,7 +41,10 @@ export default function Article({item}: {item: NewsItem}) {
                     <NewsItemDetailsEdit item={item} onEdited={handleEdit} />
                     <NewsItemDetails item={item} />
                 </Conditional>
-                <ImageList images={item.imageIds} onFileRequested={handleFileAppend}/>
+                <ImageList images={item.imageIds}/>
+                <Conditional tester={editMode}>
+                    <ImageInput onFileRequested={handleFileAppend} />
+                </Conditional>
                 <Conditional tester={isLoading}>
                     <MDBSpinner role='status'/>
                 </Conditional>

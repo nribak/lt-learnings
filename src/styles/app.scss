@@ -23,13 +23,26 @@ body {
   min-height: 40vh;
 }
 
+$image-size: 200px;
+
 .img-box {
   position: relative;
-  height: 250px;
+  height: $image-size;
   width: auto;
-  margin: 1rem;
 }
 
 .img-box > img {
   object-fit: contain;
+}
+
+.outer-img {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.outer-img>* {
+  position: fixed;
+  z-index: 2;
+  margin-top: $image-size / 4;
 }
