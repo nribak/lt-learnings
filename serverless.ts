@@ -1,6 +1,6 @@
-import type {AWS} from '@serverless/typescript';
+import type { AWS } from '@serverless/typescript';
 
-import {getAllPostHandler, getPostByIdHandler, createPostHandler, updatePostHandler, deletePostHandler, imageUploader} from '@functions/newsletter';
+import { getAllPostHandler, getPostByIdHandler, createPostHandler, updatePostHandler, deletePostHandler, imageUploader, imageRemove, getAllImages } from '@functions/newsletter';
 
 const serverlessConfiguration: AWS = {
   service: 'sls-newsletter',
@@ -22,7 +22,7 @@ const serverlessConfiguration: AWS = {
     }
   },
   // import the function via paths
-  functions: { getAllPostHandler, getPostByIdHandler, createPostHandler, updatePostHandler, deletePostHandler, imageUploader },
+  functions: { getAllPostHandler, getPostByIdHandler, createPostHandler, updatePostHandler, deletePostHandler, imageUploader, imageRemove, getAllImages },
   package: { individually: true },
   custom: {
     esbuild: {

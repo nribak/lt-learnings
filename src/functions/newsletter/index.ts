@@ -1,4 +1,4 @@
-import {handlerPath} from "@libs/handler-resolver";
+import { handlerPath } from "@libs/handler-resolver";
 
 export const getAllPostHandler = {
     handler: `${handlerPath(__dirname)}/handler.getAllPosts`,
@@ -25,8 +25,17 @@ export const updatePostHandler = {
     name: 'NewsletterUpdate'
 }
 
-
 export const imageUploader = {
     handler: `${handlerPath(__dirname)}/handler.uploadImage`,
     name: 'NewsletterUploadImage'
+}
+
+export const imageRemove = {
+    handler: `${handlerPath(__dirname)}/handler.deleteImage`,
+    name: 'NewsletterDeleteImage'
+}
+
+export const getAllImages = {
+    handler: `${handlerPath(__dirname)}/handler.getImages`,
+    name: 'NewsletterGetImages'
 }
