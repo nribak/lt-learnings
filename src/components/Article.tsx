@@ -7,7 +7,7 @@ import NewsItemDetailsEdit, {FormData} from "./edit/NewsItemDetailsEdit";
 import {useToggle} from "../utils/hooks";
 import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import ImageList from "./edit/ImageList";
 import ImageInput from "./edit/ImageInput";
 
@@ -16,21 +16,26 @@ export default function Article({item}: {item: NewsItem}) {
     const [editMode, toggleEditMode] = useToggle(item.title?.length === 0);
     const [isLoading, setIsLoading] = useState(false);
 
+    const onDone = useCallback(() => {
+        router.reload();
+        setIsLoading(false);
+    }, [router]);
+
     const handleEdit = ({title, details}: FormData) => {
         setIsLoading(true);
-        clientAPI.update(item.id, title, details).then(() => {
-            router.reload();
-            setIsLoading(false);
-        });
+        clientAPI.update(item.id, title, details).then(onDone);
     }
 
     const handleFileAppend = (file: File) => {
         setIsLoading(true);
-        clientAPI.appendImage(item.id, file).then(() => {
-            router.reload();
-            setIsLoading(false);
-        })
+        clientAPI.appendImage(item.id, file).then(onDone)
     }
+
+    const handleImageDelete = (image: string) => {
+        setIsLoading(true);
+        clientAPI.deleteImage(image).then(onDone)
+    }
+
 //https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
 
     return (
@@ -45,7 +50,7 @@ export default function Article({item}: {item: NewsItem}) {
                     <ImageInput onFileRequested={handleFileAppend} />
                 </Conditional>
                 <hr/>
-                <ImageList images={item.imageIds}/>
+                <ImageList images={item.imageIds} onImageDelete={handleImageDelete}/>
                 <Conditional tester={isLoading}>
                     <MDBSpinner role='status'/>
                 </Conditional>

@@ -1,8 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import formidable from "formidable";
-import {NewsItem} from "../../../data/models";
+import {NewsItem} from "../../../../data/models";
 import fs from 'fs';
-import API from "../../../data/api";
+import API from "../../../../data/api";
 
 const parseForm = (req: NextApiRequest): Promise<[formidable.File, string]> => {
     return new Promise<[formidable.File, string]>((resolve, reject) => {

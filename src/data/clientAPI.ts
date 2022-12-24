@@ -22,7 +22,11 @@ const clientAPI = {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('postId', postId)
-        const {data} = await instance.post('/uploadimage', formData);
+        const {data} = await instance.post('/images/upload', formData);
+        return data;
+    },
+    async deleteImage(imageId: string) {
+        const {data} = await instance.post('/images/delete', {imageId});
         return data;
     }
 }

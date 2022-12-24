@@ -1,18 +1,14 @@
-import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdb-react-ui-kit";
-import AppImage from "../common/AppImage";
+import {MDBCol, MDBRow} from "mdb-react-ui-kit";
+import ImageListItem from "./ImageListItem";
 
-export default function ImageList({images}: {images: string[]}) {
+export default function ImageList({images, onImageDelete}: {images: string[], onImageDelete: (image: string) => void}) {
 
     return (
             <MDBRow className="row-cols-2 row-cols-md-4">
                 {images.map(image => {
                     return (
                         <MDBCol key={image} className="mb-1 border p-1">
-                            <AppImage imageKey={image}/>
-                                <MDBBtn color="danger" size="sm" block className="mt-2">
-                                    <MDBIcon fas icon="trash"  size="lg" />
-                                    <span> Remove</span>
-                                </MDBBtn>
+                            <ImageListItem image={image} onDeleteClicked={onImageDelete} />
                         </MDBCol>
                     )
                 })}

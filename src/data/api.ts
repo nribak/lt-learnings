@@ -40,7 +40,12 @@ const API = {
             console.log(e);
             return null;
         }
-
+    },
+    async deleteImage(imageId: string): Promise<number> {
+        const {data} = await instance.delete('/image', {
+            data: {imageId}
+        });
+        return data;
     }
 }
 
