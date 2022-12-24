@@ -1,6 +1,6 @@
-import { NewsLetter, NewsLetterSummary } from "@functions/newsletter/models";
+import {NewsLetter, NewsLetterSummary} from "@functions/newsletter/models";
 import db from "@libs/dynamo";
-import uploadToS3 from "@libs/s3";
+import s3Storage, {objectKeyForImage} from "@libs/s3";
 
 export const getAllPosts = async (): Promise<NewsLetterSummary[]> => {
     return await db.getAll();
@@ -24,12 +24,16 @@ export const updatePost = async ({ id, details, title }: { id: string, title?: s
 }
 
 export const uploadImage = async ({ postId, fileName, fileBody }: { postId: string, fileName: string, fileBody: string }): Promise<number> => {
-    const imageId = await uploadToS3(fileName, fileBody);
-    return await db.addImage(postId, imageId);
+    const objectKey = await s3Storage.uploadFile(objectKeyForImage(fileName, postId), fileBody);
+    return await db.addImage(postId, objectKey);
 }
 
 export const deleteImage = async ({imageId}: {imageId: string}): Promise<number> => {
-    return await db.deleteImage(imageId);
+    const objectKey = imageId;// objectKeyForImage(imageId, postId)
+    const response = await db.deleteImage(objectKey);
+    if(response < 400)
+        await s3Storage.deleteFile(objectKey);
+    return response;
 }
 
 export const getImages = async ({postId}: {postId: string}): Promise<string[]> => {
