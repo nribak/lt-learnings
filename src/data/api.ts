@@ -1,6 +1,10 @@
 import axios from "axios";
 import {NewsItem} from "./models";
 
+interface PostImage {
+    id: string
+}
+
 const instance = axios.create({
     baseURL: 'https://yhn4sqmmcb.execute-api.us-east-1.amazonaws.com/production',
     headers: {'x-api-key': '020e46c2-864c-46b5-9ca9-db6367317b3c'}
@@ -15,7 +19,9 @@ const API = {
         return data;
     },
     async getById(id: string): Promise<NewsItem|null> {
-        const {data} = await instance.get(`/${id}`);
+        const {data} = await instance.get<NewsItem>(`/${id}`);
+        const {data : images} = await instance.get<PostImage[]>('/image/' + id)
+        data.imageIds = images.map(image => image.id);
         return data;
     },
     async updateById(id: string, title?: string, details?: string, image?: string): Promise<NewsItem|null> {

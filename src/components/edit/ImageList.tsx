@@ -9,7 +9,7 @@ export default function ImageList({images}: {images: string[]}) {
                     return (
                         <MDBCol key={image} className="mb-1 border p-1">
                             <AppImage imageKey={image}/>
-                                <MDBBtn color="danger" size="sm" block>
+                                <MDBBtn color="danger" size="sm" block className="mt-2">
                                     <MDBIcon fas icon="trash"  size="lg" />
                                     <span> Remove</span>
                                 </MDBBtn>

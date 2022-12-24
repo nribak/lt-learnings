@@ -1,6 +1,5 @@
 import axios from "axios";
 import {NewsItem} from "./models";
-import {convertFile} from "../components/utils/helpers";
 
 const instance = axios.create({
     baseURL: '/api/news'
@@ -20,8 +19,10 @@ const clientAPI = {
         return data;
     },
     async appendImage(postId: string, file: File){
-        const fileData = await convertFile(file);
-        const {data} = await instance.post('/upload', {postId, name: file?.name, data: fileData});
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('postId', postId)
+        const {data} = await instance.post('/uploadimage', formData);
         return data;
     }
 }

@@ -4,7 +4,7 @@ import {MDBContainer, MDBSpinner} from "mdb-react-ui-kit";
 import Conditional from "./common/Conditional";
 import NewsItemDetails from "./edit/NewsItemDetails";
 import NewsItemDetailsEdit, {FormData} from "./edit/NewsItemDetailsEdit";
-import {useToggle} from "./utils/hooks";
+import {useToggle} from "../utils/hooks";
 import clientAPI from "../data/clientAPI";
 import {useRouter} from "next/router";
 import {useState} from "react";
@@ -41,10 +41,11 @@ export default function Article({item}: {item: NewsItem}) {
                     <NewsItemDetailsEdit item={item} onEdited={handleEdit} />
                     <NewsItemDetails item={item} />
                 </Conditional>
-                <ImageList images={item.imageIds}/>
                 <Conditional tester={editMode}>
                     <ImageInput onFileRequested={handleFileAppend} />
                 </Conditional>
+                <hr/>
+                <ImageList images={item.imageIds}/>
                 <Conditional tester={isLoading}>
                     <MDBSpinner role='status'/>
                 </Conditional>

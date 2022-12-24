@@ -1,5 +1,5 @@
 import {MDBBtn, MDBFile} from "mdb-react-ui-kit";
-import {useFile} from "../utils/hooks";
+import {useFile} from "../../utils/hooks";
 import {FormEvent} from "react";
 
 export default function ImageInput(props: {onFileRequested: (file: File) => void}) {
@@ -12,7 +12,7 @@ export default function ImageInput(props: {onFileRequested: (file: File) => void
     return (
         <form className="d-flex justify-content-between align-items-center mt-2" onSubmit={handleSubmit}>
             <MDBFile accept="image/*" onChange={setFile} />
-            <MDBBtn className="mx-2" type="submit">Add</MDBBtn>
+            <MDBBtn className="mx-2" type="submit" disabled={file === undefined}>Add</MDBBtn>
         </form>
     )
 }
