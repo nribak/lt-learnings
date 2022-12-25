@@ -46,3 +46,9 @@ $image-size: 200px;
   z-index: 2;
   margin-top: $image-size / 4;
 }
+
+.page-spinner {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+}

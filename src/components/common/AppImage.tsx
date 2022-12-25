@@ -8,7 +8,14 @@ export default function AppImage({imageKey}: {imageKey?: string}) {
     return (
         <Conditional tester={imageKey !== undefined && imageKey.length > 0} >
             <div className="img-box">
-                <Image src={src} alt={imageKey ?? ''} fill className="card-img img-fluid" sizes={sizes} priority={false}/>
+                <Image
+                    src={src}
+                    alt={imageKey ?? ''}
+                    fill
+                    className="card-img img-fluid"
+                    sizes={sizes}
+                    priority={false}
+                />
             </div>
         </Conditional>
     )

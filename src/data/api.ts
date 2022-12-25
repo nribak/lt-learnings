@@ -33,17 +33,19 @@ const API = {
     },
     async upload(name: string, base64Image: string, postId: string): Promise<NewsItem|null> {
         const payload = {postId, fileName: name, fileBody: base64Image}
+        console.log(base64Image.length);
         try {
             const {data} = await instance.post('/image', payload);
             return data;
         } catch (e: any) {
-            console.log(e);
+            // console.log(e);
             return null;
         }
     },
-    async deleteImage(imageId: string): Promise<number> {
+    async deleteImage(imageId: string, postId: string): Promise<number> {
+        console.log(postId, imageId);
         const {data} = await instance.delete('/image', {
-            data: {imageId}
+            data: {imageId, postId}
         });
         return data;
     }

@@ -1,6 +1,6 @@
 import {NewsItem} from "../data/models";
 import NavigationTab from "./edit/NavigationTab";
-import {MDBContainer, MDBSpinner} from "mdb-react-ui-kit";
+import {MDBContainer} from "mdb-react-ui-kit";
 import Conditional from "./common/Conditional";
 import NewsItemDetails from "./edit/NewsItemDetails";
 import NewsItemDetailsEdit, {FormData} from "./edit/NewsItemDetailsEdit";
@@ -10,6 +10,7 @@ import {useRouter} from "next/router";
 import {useCallback, useState} from "react";
 import ImageList from "./edit/ImageList";
 import ImageInput from "./edit/ImageInput";
+import PageSpinner from "./common/PageSpinner";
 
 export default function Article({item}: {item: NewsItem}) {
     const router = useRouter();
@@ -33,11 +34,10 @@ export default function Article({item}: {item: NewsItem}) {
 
     const handleImageDelete = (image: string) => {
         setIsLoading(true);
-        clientAPI.deleteImage(image).then(onDone)
+        clientAPI.deleteImage(image, item.id).then(onDone)
     }
 
 //https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
-
     return (
         <>
             <NavigationTab onEdit={toggleEditMode} />
@@ -52,7 +52,7 @@ export default function Article({item}: {item: NewsItem}) {
                 <hr/>
                 <ImageList images={item.imageIds} onImageDelete={handleImageDelete}/>
                 <Conditional tester={isLoading}>
-                    <MDBSpinner role='status'/>
+                    <PageSpinner />
                 </Conditional>
             </MDBContainer>
         </>

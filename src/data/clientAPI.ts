@@ -25,8 +25,8 @@ const clientAPI = {
         const {data} = await instance.post('/images/upload', formData);
         return data;
     },
-    async deleteImage(imageId: string) {
-        const {data} = await instance.post('/images/delete', {imageId});
+    async deleteImage(imageId: string, postId: string) {
+        const {data} = await instance.post('/images/delete', {imageId, postId});
         return data;
     }
 }
