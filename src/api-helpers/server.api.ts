@@ -19,11 +19,18 @@ const serverApi = {
     },
     getPostById: async (id: string): Promise<Post|null> => {
         try {
-            if(id === '1')
-                return null;
             const {data} = await instance.get(`/${id}`);
             return data;
         } catch (e) {
+            return null;
+        }
+    },
+    updatePost: async (id: string, title: string, details: string): Promise<Post|null> => {
+        try {
+            const {data} = await instance.put(`/${id}`, {title, details});
+            return data;
+        } catch (e) {
+            console.log(e);
             return null;
         }
     }

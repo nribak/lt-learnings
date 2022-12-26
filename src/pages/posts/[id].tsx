@@ -3,12 +3,20 @@ import {GetServerSideProps} from "next";
 import serverApi from "../../api-helpers/server.api";
 import {Post} from "../../api-helpers/models";
 import PostDetails from "../../components/PostDetails";
+import TopNav from "../../components/TopNav";
+import {useState} from "react";
+import PostEdit from "../../components/PostEdit";
 
-export default function PostPage(props: {post: Post}) {
+export default function PostPage({post}: {post: Post}) {
+    const [editMode, setEditMode] = useState(post.title.length === 0);
+
     return (
-        <MDBContainer className="pt-2">
-            <PostDetails post={props.post} />
-        </MDBContainer>
+        <>
+            <TopNav isEditMode={editMode} setEditMode={setEditMode}/>
+            <MDBContainer className="pt-2">
+                {editMode ? <PostEdit post={post}/> : <PostDetails post={post} />}
+            </MDBContainer>
+        </>
     )
 }
 
