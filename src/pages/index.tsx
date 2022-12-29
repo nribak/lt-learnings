@@ -1,15 +1,9 @@
-import {GetStaticProps} from "next";
-import API from "../data/api";
-import {NewsItem} from "../data/models";
+import useSWR from 'swr';
 import App from "../components/App";
+import clientAPI from "../data/clientAPI";
 
-export default function Home({data}: {data: NewsItem[]}) {
-  return <App data={data} />;
+export default function Home() {
+  const {data} = useSWR('all', clientAPI.getAll);
+  return <App data={data ?? []} />;
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-    const data = await API.getAll();
-    return {
-        props: {data}
-    }
-}

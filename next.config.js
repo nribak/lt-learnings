@@ -9,6 +9,9 @@ const nextConfig = {
         hostname: 'd2b1beblys53u7.cloudfront.net'
       }
     ]
+  },
+  compiler: {
+    styledComponents: true
   }
 
 }

@@ -14,7 +14,6 @@ body {
   font-weight: 700;
 }
 
-
 .details-text {
   white-space: pre-wrap;
 }
@@ -23,28 +22,9 @@ body {
   min-height: 40vh;
 }
 
-$image-size: 200px;
-
-.img-box {
-  position: relative;
-  height: $image-size;
-  width: auto;
-}
-
-.img-box > img {
-  object-fit: contain;
-}
-
-.outer-img {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.outer-img>* {
-  position: fixed;
-  z-index: 2;
-  margin-top: $image-size / 4;
+.img-object-fit {
+  object-fit: cover;
+  position: relative !important;
 }
 
 .page-spinner {

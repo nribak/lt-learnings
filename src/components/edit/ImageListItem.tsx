@@ -12,7 +12,6 @@ export default function ImageListItem({image, onDeleteClicked}: {image: string, 
             <AppImage imageKey={image}/>
             <MDBBtn color="danger" size="sm" block className="mt-2" onClick={handleDelete}>
                 <MDBIcon fas icon="trash"  size="lg" />
-                <span> Remove</span>
             </MDBBtn>
         </>
     )

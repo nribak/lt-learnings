@@ -6,6 +6,10 @@ const instance = axios.create({
 });
 
 const clientAPI = {
+    async getAll(): Promise<NewsItem[]> {
+        const {data} = await instance.get('/all');
+        return data;
+    },
     async create(): Promise<string> {
         const {data} = await instance.post('/create', {});
         return data.id;
