@@ -6,3 +6,8 @@ export interface NewsItem {
     details?: string,
     imageIds: string[]
 }
+
+export interface DataResponse<T> {
+    data: T,
+    fromCache: boolean
+}

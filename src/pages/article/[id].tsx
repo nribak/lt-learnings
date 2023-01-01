@@ -1,29 +1,32 @@
-import {NewsItem} from "../../data/models";
-import {GetStaticPaths, GetStaticProps} from "next";
+import {DataResponse, NewsItem} from "../../data/models";
+import {GetServerSideProps} from "next";
 import API from "../../data/api";
 import Article from "../../components/Article";
+import RedisCache from "../../data/redis";
 
-export default function ArticlePage({item}: {item: NewsItem}) {
-    return <Article item={item} />;
+export default function ArticlePage({response}: {response: DataResponse<NewsItem>}) {
+    return <Article item={response.data} />
 }
 
-export const getStaticPaths: GetStaticPaths = () => {
-    return {
-        paths: [],
-        fallback: 'blocking'
-    }
-}
-export const getStaticProps: GetStaticProps = async (context) => {
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const id = context.params?.id;
-    if(id) {
-        const item = await API.getById(id as string)
-        if(item)
+    const redisCache = new RedisCache<NewsItem>();
+    const cached = await redisCache.getById(id as string);
+    if(cached) {
+        return {
+            props: {response: {fromCache: true, data: cached}}
+        }
+    } else {
+        const item = await API.getById(id as string);
+        if(item) {
+            await redisCache.putItem(item.id, item);
             return {
-                props: {item}
+                props: {response: {fromCache: false, data: item}}
             }
-    }
-    return {
-        notFound: true
+        }
+        else return {
+            notFound: true
+        }
     }
 }
-

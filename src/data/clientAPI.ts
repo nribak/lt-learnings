@@ -1,12 +1,12 @@
 import axios from "axios";
-import {NewsItem} from "./models";
+import {DataResponse, NewsItem} from "./models";
 
 const instance = axios.create({
     baseURL: '/api/news'
 });
 
 const clientAPI = {
-    async getAll(): Promise<NewsItem[]> {
+    async getAll(): Promise<DataResponse<NewsItem[]>> {
         const {data} = await instance.get('/all');
         return data;
     },
