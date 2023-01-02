@@ -1,5 +1,5 @@
 import axios from "axios";
-import {Post} from "./models";
+import {Post, PostSummary} from "./models";
 
 const instance = axios.create({
     baseURL: '/api'
@@ -12,6 +12,10 @@ const clientApi = {
     },
     updatePost: async (id: string, title: string, details: string): Promise<Post|null> => {
         const {data} = await instance.post('update', {id, title, details});
+        return data;
+    },
+    getAllPosts: async (): Promise<PostSummary[]> => {
+        const {data} = await instance.get('list');
         return data;
     }
 }

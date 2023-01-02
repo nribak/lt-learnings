@@ -1,10 +1,10 @@
-import {MDBContainer} from "mdb-react-ui-kit";
-import {GetServerSideProps} from "next";
-import serverApi from "../api-helpers/server.api";
 import {PostSummary} from "../api-helpers/models";
+import {MDBContainer} from "mdb-react-ui-kit";
 import PostsList from "../components/PostsList";
+import {GetStaticProps} from "next";
+import serverApi from "../api-helpers/server.api";
 
-export default function Home({posts}: {posts: PostSummary[]}) {
+export default function SSGHome({posts}: {posts: PostSummary[]}) {
     return (
         <MDBContainer className="pt-2">
             <PostsList postSummaries={posts} />
@@ -12,10 +12,9 @@ export default function Home({posts}: {posts: PostSummary[]}) {
     )
 }
 
-// SSR
-export const getServerSideProps: GetServerSideProps = async () => {
-    console.log('SSR Called');
-
+// SSG
+export const getStaticProps: GetStaticProps = async (context) => {
+    console.log('SSG Called');
     const postsSummaries = await serverApi.getAllPosts();
     return {
         props: {posts: postsSummaries}
