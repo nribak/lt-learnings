@@ -15,6 +15,7 @@ const clientApi = {
         return data;
     },
     getAllPosts: async (): Promise<PostSummary[]> => {
+        console.log('calling api')
         const {data} = await instance.get('list');
         return data;
     }
