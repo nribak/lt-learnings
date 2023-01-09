@@ -9,10 +9,9 @@ import PostEdit from "../../components/PostEdit";
 
 export default function PostPage({post}: {post: Post}) {
     const [editMode, setEditMode] = useState(post.title.length === 0);
-
     return (
         <>
-            <TopNav isEditMode={editMode} setEditMode={setEditMode}/>
+            <TopNav logText="render top nav" isEditMode={editMode} setEditMode={setEditMode}/>
             <MDBContainer className="pt-2">
                 {editMode ? <PostEdit post={post}/> : <PostDetails post={post} />}
             </MDBContainer>
