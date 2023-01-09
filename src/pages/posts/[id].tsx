@@ -11,7 +11,7 @@ export default function PostPage({post}: {post: Post}) {
     const [editMode, setEditMode] = useState(post.title.length === 0);
     return (
         <>
-            <TopNav logText="render top nav" isEditMode={editMode} setEditMode={setEditMode}/>
+            <TopNav isEditMode={editMode} setEditMode={setEditMode}/>
             <MDBContainer className="pt-2">
                 {editMode ? <PostEdit post={post}/> : <PostDetails post={post} />}
             </MDBContainer>
@@ -22,7 +22,6 @@ export default function PostPage({post}: {post: Post}) {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const id = context.params?.id;
     const post = await serverApi.getPostById(id as string);
-
     if(post) {
         return {
             props: {post}

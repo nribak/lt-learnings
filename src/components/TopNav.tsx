@@ -1,8 +1,7 @@
 import {MDBCheckbox, MDBContainer, MDBNavbar} from "mdb-react-ui-kit";
 import {ChangeEvent} from "react";
-import {withLog} from "../utils/hocs";
 
-function TopNav({isEditMode, setEditMode}: {isEditMode: boolean, setEditMode: (value: boolean) => void}) {
+export default function TopNav({isEditMode, setEditMode}: {isEditMode: boolean, setEditMode: (value: boolean) => void}) {
 
     const handleCheckChange = (ev: ChangeEvent<HTMLInputElement>) => {
         const isChecked = ev.currentTarget.checked;
@@ -17,4 +16,3 @@ function TopNav({isEditMode, setEditMode}: {isEditMode: boolean, setEditMode: (v
     )
 }
 
-export default withLog(TopNav);

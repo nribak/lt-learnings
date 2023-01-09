@@ -9,3 +9,14 @@
 .app-font-bold {
     font-weight: 700;
 }
+
+.img-container {
+    height: 35vh;
+    width: auto;
+    position: relative;
+    background-color: yellow;
+}
+
+.img-box {
+    object-fit: cover;
+}

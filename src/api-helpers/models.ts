@@ -6,5 +6,6 @@ export interface PostSummary {
 }
 
 export interface Post extends PostSummary {
-    details: string
+    details: string,
+    imageIds?: string[]
 }
