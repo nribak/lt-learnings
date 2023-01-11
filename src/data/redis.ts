@@ -9,7 +9,6 @@ export default class RedisCache<T extends {}> {
 
     constructor() {
         this.client = new Redis(process.env.REDIS_CONNECTION!);
-        console.log(process.env.SOMEKEY);
     }
 
     async getAll(): Promise<T[] | null> {
