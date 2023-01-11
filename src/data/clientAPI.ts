@@ -10,9 +10,9 @@ const clientAPI = {
         const {data} = await instance.get('/all');
         return data;
     },
-    async create(): Promise<string> {
+    async create(): Promise<NewsItem> {
         const {data} = await instance.post('/create', {});
-        return data.id;
+        return data;
     },
     async update(id: string, title?: string, details?: string): Promise<NewsItem|null> {
         const {data} = await instance.post('/edit', {id, title, details});

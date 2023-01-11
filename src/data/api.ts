@@ -10,9 +10,10 @@ const instance = axios.create({
     headers: {'x-api-key': '020e46c2-864c-46b5-9ca9-db6367317b3c'}
 })
 const API = {
-    async create(): Promise<string> {
-        const {data} = await instance.post('/', {title: '', details: ''});
-        return data.id;
+    async create(): Promise<NewsItem> {
+        const now = Date.now();
+        const {data} = await instance.post('/', {title: now.toString(), details: ''});
+        return data;
     },
     async getAll(): Promise<NewsItem[]> {
         const {data} = await instance.get('/');

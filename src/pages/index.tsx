@@ -1,9 +1,12 @@
-import useSWR from 'swr';
 import App from "../components/App";
-import clientAPI from "../data/clientAPI";
+import {Provider} from "react-redux";
+import store from "../redux/store";
 
 export default function Home() {
-  const {data} = useSWR('all', clientAPI.getAll);
-  return <App data={data?.data ?? []} />;
+  return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+  );
 }
 

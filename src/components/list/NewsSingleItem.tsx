@@ -3,16 +3,13 @@ import {MDBBtn, MDBCard, MDBCardBody, MDBCardFooter, MDBCardTitle, MDBIcon} from
 import Link from "next/link";
 import LastUpdatedText from "../LastUpdatedText";
 import {MouseEvent} from "react";
-import clientAPI from "../../data/clientAPI";
-import {useRouter} from "next/router";
 
-export default function NewsSingleItem({post}: {post: NewsItem}) {
-    const router = useRouter();
+export default function NewsSingleItem({post, onDelete}: {post: NewsItem, onDelete: (id: string) => void}) {
     const {title, updatedAt, id} = post;
     const handleClick = (ev: MouseEvent) => {
         ev.stopPropagation();
         ev.preventDefault();
-        clientAPI.delete(post.id).then(router.reload);
+        onDelete(id);
 
     }
     return (

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.1",
+    "@reduxjs/toolkit": "^1.9.1",
     "@types/formidable": "^2.0.5",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
@@ -25,6 +26,7 @@
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.5",
     "react-shimmer": "^3.2.0",
     "sass": "^1.56.1",
     "styled-components": "^5.3.6",

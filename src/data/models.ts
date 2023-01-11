@@ -11,3 +11,8 @@ export interface DataResponse<T> {
     data: T,
     fromCache: boolean
 }
+
+export interface PostsState {
+    posts: NewsItem[],
+    isLoading: boolean
+}
