@@ -27,6 +27,7 @@ const postSlice = createSlice({
     reducers: {
         applyData: (state, {payload}: PayloadAction<NewsItem>) => {
             state.post = payload;
+            state.editMode = payload.details?.length === 0
         },
         toggleEditMode: state => {
             state.editMode = !state.editMode;

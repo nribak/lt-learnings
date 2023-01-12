@@ -3,13 +3,12 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import '../styles/app.scss';
 
 import type {AppProps} from 'next/app'
-import {Provider} from "react-redux";
+import {withRedux} from "../utils/hocs";
 import store from "../redux/store";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return (
-      <Provider store={store}>
+function App({ Component, pageProps }: AppProps) {
+    return (
         <Component {...pageProps} />
-      </Provider>
-  )
+    )
 }
+export default withRedux(App, store);
