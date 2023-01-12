@@ -4,54 +4,51 @@ import {MDBContainer} from "mdb-react-ui-kit";
 import Conditional from "./common/Conditional";
 import NewsItemDetails from "./edit/NewsItemDetails";
 import NewsItemDetailsEdit, {FormData} from "./edit/NewsItemDetailsEdit";
-import {useToggle} from "../utils/hooks";
-import clientAPI from "../data/clientAPI";
-import {useRouter} from "next/router";
-import {useCallback, useState} from "react";
+import {useEffect} from "react";
 import ImageList from "./edit/ImageList";
 import ImageInput from "./edit/ImageInput";
 import PageSpinner from "./common/PageSpinner";
+import {useAppDispatch, useAppSelector} from "../redux/store";
+import postSlice, {postSliceThunks} from "../redux/post.slice";
 
 export default function Article({item}: {item: NewsItem}) {
-    const router = useRouter();
-    const [editMode, toggleEditMode] = useToggle(item.title?.length === 0);
-    const [isLoading, setIsLoading] = useState(false);
+    const state = useAppSelector(st => st.post);
+    const dispatch = useAppDispatch();
 
-    const onDone = useCallback(() => {
-        router.reload();
-        setIsLoading(false);
-    }, [router]);
+    useEffect(() => {
+        dispatch(postSlice.actions.applyData(item));
+    }, [item, dispatch]);
+
 
     const handleEdit = ({title, details}: FormData) => {
-        setIsLoading(true);
-        clientAPI.update(item.id, title, details).then(onDone);
+        dispatch(postSliceThunks.edit({id: item.id, title, details}));
     }
 
     const handleFileAppend = (file: File) => {
-        setIsLoading(true);
-        clientAPI.appendImage(item.id, file).then(onDone)
+        // setIsLoading(true);
+        // clientAPI.appendImage(item.id, file).then(onDone)
     }
 
     const handleImageDelete = (image: string) => {
-        setIsLoading(true);
-        clientAPI.deleteImage(image, item.id).then(onDone)
+        // setIsLoading(true);
+        // clientAPI.deleteImage(image, item.id).then(onDone)
     }
 
-//https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.UpdateExpressions.html
+
     return (
         <>
-            <NavigationTab onEdit={toggleEditMode} />
+            <NavigationTab onEdit={() => dispatch(postSlice.actions.toggleEditMode())} />
             <MDBContainer className="pt-2">
-                <Conditional tester={editMode}>
-                    <NewsItemDetailsEdit item={item} onEdited={handleEdit} />
-                    <NewsItemDetails item={item} />
+                <Conditional tester={state.editMode}>
+                    <NewsItemDetailsEdit item={state.post} onEdited={handleEdit} />
+                    <NewsItemDetails item={state.post} />
                 </Conditional>
-                <Conditional tester={editMode}>
+                <Conditional tester={state.editMode}>
                     <ImageInput onFileRequested={handleFileAppend} />
                 </Conditional>
                 <hr/>
-                <ImageList images={item.imageIds} onImageDelete={handleImageDelete}/>
-                <Conditional tester={isLoading}>
+                <ImageList images={state.post.imageIds} onImageDelete={handleImageDelete}/>
+                <Conditional tester={state.isLoading}>
                     <PageSpinner />
                 </Conditional>
             </MDBContainer>

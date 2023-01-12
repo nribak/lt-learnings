@@ -16,3 +16,9 @@ export interface PostsState {
     posts: NewsItem[],
     isLoading: boolean
 }
+
+export interface PostState {
+    post: NewsItem,
+    isLoading: boolean,
+    editMode: boolean
+}

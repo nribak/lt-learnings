@@ -21,6 +21,9 @@ export default function App() {
     }, [data, dispatch])
 
     const LoadingModal = dynamic(() => import('./common/SpinnerModal'), {ssr: false});
+
+    console.log(state);
+
     return (
         <>
             <LoadingModal show={isLoading || state.isLoading}/>

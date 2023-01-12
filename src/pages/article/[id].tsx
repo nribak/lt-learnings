@@ -4,7 +4,9 @@ import API from "../../data/api";
 import Article from "../../components/Article";
 
 export default function ArticlePage({response}: {response: DataResponse<NewsItem>}) {
-    return <Article item={response.data} />
+    return (
+        <Article item={response.data} />
+    )
 }
 
 
@@ -17,15 +19,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     //         props: {response: {fromCache: true, data: cached}}
     //     }
     // } else {
-        const item = await API.getById(id as string);
-        if(item) {
-            // await redisCache.putItem(item.id, item);
-            return {
-                props: {response: {fromCache: false, data: item}}
-            }
+    const item = await API.getById(id as string);
+    if(item) {
+        // await redisCache.putItem(item.id, item);
+        return {
+            props: {response: {fromCache: false, data: item}}
         }
-        else return {
-            notFound: true
-        }
+    }
+    else return {
+        notFound: true
+    }
     // }
 }
