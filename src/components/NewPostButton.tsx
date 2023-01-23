@@ -1,12 +1,10 @@
-import clientApi from "../api-helpers/client.api";
-import {useRouter} from "next/router";
+import {useAppDispatch} from "../redux/store";
+import {addPostThunk} from "../redux/summaries.slice";
 
 export default function NewPostButton() {
-    const router = useRouter();
+    const dispatch = useAppDispatch();
     const handleClick = () => {
-        clientApi.createPost('', '').then(post => {
-            router.push(`posts/${post.id}`);
-        })
+        dispatch(addPostThunk());
     }
     return (
         <div onClick={handleClick}>

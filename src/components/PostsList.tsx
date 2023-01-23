@@ -1,7 +1,7 @@
 import {PostSummary} from "../api-helpers/models";
 import {MDBListGroup, MDBListGroupItem} from "mdb-react-ui-kit";
-import Link from "next/link";
 import NewPostButton from "./NewPostButton";
+import PostItem from "./PostItem";
 
 
 export interface PostsListProps { postSummaries: PostSummary[] }
@@ -12,11 +12,9 @@ export default function PostsList({postSummaries}: PostsListProps) {
         <MDBListGroup>
             {postSummaries.map(summary => {
                 return (
-                    <Link href={`/posts/${summary.id}`} key={summary.id}>
-                        <MDBListGroupItem action>
-                            {summary.title}
+                        <MDBListGroupItem action key={summary.id}>
+                            <PostItem post={summary} />
                         </MDBListGroupItem>
-                    </Link>
                 )
             })}
             <MDBListGroupItem action>
