@@ -16,6 +16,13 @@ export const addPostThunk = createAsyncThunk(
     async (): Promise<PostSummary> => {
         return await clientApi.createPost('newly created post', '');
     }
+);
+
+export const deletePostThunk = createAsyncThunk(
+    sliceName + '/delete',
+    async (id: string): Promise<[string, boolean]> => {
+        return [id, await clientApi.deletePost(id)]
+    }
 )
 
 
@@ -24,6 +31,7 @@ const summariesSlice = createSlice({
     initialState: initState,
     reducers: {
         applyData: (state, {payload}: PayloadAction<PostSummary[]>) => {
+            console.log(payload);
             state.posts = payload;
         }
     },
@@ -34,6 +42,19 @@ const summariesSlice = createSlice({
         .addCase(addPostThunk.fulfilled, (state, {payload}) => {
             state.isLoading = false;
             state.posts.push(payload);
+        })
+        .addCase(deletePostThunk.pending, state => {
+            state.isLoading = true;
+        })
+        .addCase(deletePostThunk.fulfilled, (state, {payload}) => {
+            const [postId, deleteResult] = payload;
+            state.isLoading = false;
+            if(deleteResult) {
+                // state.posts = state.posts.filter(post => post.id !== postId);
+                const idx = state.posts.findIndex(post => post.id === postId);
+                if(idx !== -1)
+                    state.posts.splice(idx, 1);
+            }
         })
 });
 

@@ -1,16 +1,14 @@
 import {PostSummary} from "../api-helpers/models";
 import {MDBBtn} from "mdb-react-ui-kit";
 import Link from "next/link";
-import {useAppDispatch} from "../redux/store";
 
-export default function PostItem({post}: {post: PostSummary}) {
-    const dispatcher = useAppDispatch();
+export default function PostItem({post, onPostDelete}: {post: PostSummary, onPostDelete: (postId: string) => void}) {
 
     const handleDelete = () => {
-        const id = post.id;
-        //TODO: delete post (id)
-
+        onPostDelete(post.id);
     }
+
+
     return (
         <div>
             <div className="fs-4">{post.title}</div>

@@ -15,8 +15,11 @@ const clientApi = {
         return data;
     },
     getAllPosts: async (): Promise<PostSummary[]> => {
-        console.log('calling api')
         const {data} = await instance.get('list');
+        return data;
+    },
+    deletePost: async (id: string): Promise<boolean> => {
+        const {data} = await instance.post('delete', {id});
         return data;
     }
 }

@@ -48,6 +48,16 @@ const serverApi = {
             console.log(e);
             return null;
         }
+    },
+    deletePost: async (id: string): Promise<boolean> => {
+        try {
+            await instance.delete(`/${id}`);
+            return true;
+        }
+        catch (e) {
+            console.log(e);
+            return false;
+        }
     }
 }
 
